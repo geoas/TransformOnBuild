@@ -6,6 +6,10 @@ Usage:
 
 Release Notes:
 
+v1.22.1
+
+* Add support for Visual Studio 2019
+
 v1.22
 
 * Fixed support for Visual Studio 2017 v15.8 - possible regression with Visual Studio dll lock file

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.8">
     <id>Clarius.TransformOnBuild</id>
-    <version>1.22</version>
+    <version>1.22.1</version>
     <title>Transform Text Templates On Build</title>
     <description>Automatically transforms on build all files with a build action of `None/Content` that have the `TextTemplatingFileGenerator` custom tools associated, without requiring the installation of any Visual Studio SDK.</description>
     <authors>Daniel Cazzulino, Michael Naumov</authors>
@@ -14,6 +14,8 @@
     <tags>visualstudio t4 text template transformation clariuslabs</tags>
     <developmentDependency>true</developmentDependency>
     <releaseNotes>
+* Add support for Visual Studio 2019
+	
 * Fixed support for Visual Studio 2017 v15.8 - possible regression with Visual Studio dll lock file
 
 * Add support for Visual Studio 2017 BuildTools
