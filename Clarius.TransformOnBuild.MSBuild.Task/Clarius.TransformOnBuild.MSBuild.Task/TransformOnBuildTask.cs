@@ -17,6 +17,7 @@ namespace Clarius.TransformOnBuild.MSBuild.Task
 		private ProjectInstance _projectInstance;
 		private Dictionary<string, string> _properties;
 		private string _programFiles;
+		private string _programFilesX86;
 		private string _commonProgramFiles;
 		const BindingFlags BindingFlags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.FlattenHierarchy | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public;
 
@@ -140,25 +141,29 @@ namespace Clarius.TransformOnBuild.MSBuild.Task
 			if (string.IsNullOrEmpty(_commonProgramFiles))
 				_commonProgramFiles = GetPropertyValue("CommonProgramFiles");
 
-			_programFiles = Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-			if (string.IsNullOrEmpty(_programFiles))
-				_programFiles = GetPropertyValue("ProgramFiles");
+			_programFiles = Environment.GetEnvironmentVariable("ProgramW6432");
+            _programFilesX86 = Environment.GetEnvironmentVariable("ProgramFiles(x86)");			
 
 			var textTransformPathCandidates = new[]
 			{
 				GetPropertyValue("TextTransformPath"),
-				$@"{_programFiles}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2019\Professional\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2019\Community\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2017\Professional\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\Preview\Professional\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\Preview\Enterprise\Common7\IDE\TextTransform.exe",
-				$@"{_programFiles}\Microsoft Visual Studio\Preview\Community\Common7\IDE\TextTransform.exe",
+				$@"{_programFiles}\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\TextTransform.exe",
+				$@"{_programFiles}\Microsoft Visual Studio\2022\Professional\Common7\IDE\TextTransform.exe",
+				$@"{_programFiles}\Microsoft Visual Studio\2022\Community\Common7\IDE\TextTransform.exe",
+				$@"{_programFiles}\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2019\Professional\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2019\Community\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2017\Professional\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2017\Community\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\2017\BuildTools\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\Preview\Professional\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\Preview\Enterprise\Common7\IDE\TextTransform.exe",
+				$@"{_programFilesX86}\Microsoft Visual Studio\Preview\Community\Common7\IDE\TextTransform.exe",
 				$@"{_commonProgramFiles}\Microsoft Shared\TextTemplating\{GetPropertyValue("VisualStudioVersion")}\TextTransform.exe",
+				$@"{_commonProgramFiles}\Microsoft Shared\TextTemplating\15.0\TextTransform.exe",
 				$@"{_commonProgramFiles}\Microsoft Shared\TextTemplating\14.0\TextTransform.exe",
 				$@"{_commonProgramFiles}\Microsoft Shared\TextTemplating\13.0\TextTransform.exe",
 				$@"{_commonProgramFiles}\Microsoft Shared\TextTemplating\12.0\TextTransform.exe",
